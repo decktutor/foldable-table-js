@@ -1,12 +1,20 @@
 <!DOCTYPE html>
 <html>
-
 <head>
+  <title>Foldable Table Test</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width">
-  <title>Foldable Table Test</title>
-  <link rel="stylesheet" type="text/css" href="foldable-table.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="foldable-table.css" media="screen" />
   <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
+  <script src="foldable-table.js" charset="utf-8"></script>
+  <style type="text/css">
+    #foldable-table-example-1,
+    #foldable-table-example-2 {
+      padding: 1em 0 2em 4em;
+      max-width: 1200px;
+    }
+
+  </style>
 </head>
 
 <body>
@@ -23,31 +31,36 @@
     ];
 
     /* Columns descriptions */
-    const header = [
+    const headers = [
       "good", "bad", "price"
     ];
 
-    /* Columns formatters */
     const formatters = [
       null, null, (n) => (Number(n) / 100).toFixed(2) + ' €'
     ];
 
     $(() => {
-      /* Initialize with data and formatters */
-      $('#foldable-table-example').foldableTable({ data, formatters });
+      $('#foldable-table-example-1').foldableTable({
+        data: data,
+        formatters: formatters,
+      });
+      $('#foldable-table-example-2').foldableTable({
+        data: data,
+        formatters: formatters,
+        headers: headers,
+        icons: true
+      });
 
-      /* Initialize with data, formatters and headers */
-      $('#foldable-table-example2').foldableTable({ data, formatters, header });
-
-      //setTimeout(()=>$('#foldable-table-example').data('foldableTable').collapseAll(), 1000);
-      //setTimeout(()=>$('#foldable-table-example2').data('foldableTable').expandAll(), 2000);
+      $('#foldable-table-example-1').data("foldableTable").expandAll();
+      $('#foldable-table-example-2').data("foldableTable").expandAll();
     });
   </script>
-  <script src="foldable-table.js" charset="utf-8"></script>
-  <h2>Table without headers</h2>
-  <div id="foldable-table-example" title="Example Title"></div>
-  <h2>Table with headers</h2>
-  <div id="foldable-table-example2" title="Example Title"></div>
-</body>
 
+  <h1>First example, basic data</h1>
+  <div id="foldable-table-example-1"></div>
+
+  <h1>Second example, with title and headers</h1>
+  <div id="foldable-table-example-2" title="Example Title"></div>
+
+</body>
 </html>

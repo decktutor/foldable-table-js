@@ -1,68 +1,111 @@
-.branch {
-  padding-left: 1em;
+.foldable-table {
+  position: relative;
 }
-
-.foldable-table > .branch {
-  padding-left: 0;
+.foldable-table .branch {
 }
+  /* indent internal branches */
+  .foldable-table .branch .branch {
+    padding-left: 1em;
+  }
+  /* hide folded branch's sub-branches */
+  .foldable-table .branch.folded .branch {
+    display: none;
+  }
 
-.branch .main {
-  display: inline-block;
-}
+  .foldable-table .branch .row .link {
+    display: inline-block;
+    vertical-align: middle;
+  }
 
-.branch.folded .branch {
-  display: none;
-}
+  .foldable-table .branch .row:hover::before {
+    content: "x";
+    display: block;
+    min-height: 3px;
+    position: absolute;
+    text-indent: -5ex;
+    overflow: hidden;
+    left: 0;
+    right: 0;
+    background: #f0f0f0;
+    z-index: -1;
+    white-space: nowrap;
+  }
 
-.branch .toggle-fold {
-  display: none;
-  text-align: center;
-  width: 1em;
-  text-decoration: none;
-}
+  /* folding icon */
+  .foldable-table .branch .row .toggle-fold {
+    display: inline-block;
+    text-align: center;
+    width: 1em;
+    text-decoration: none;
+    xbackground: #c0c0c0;
+    margin-right: 0.4ex;
+  }
 
-.branch.has-branches .toggle-fold {
-  display: inline-block;
-}
+  .foldable-table.with-icons .branch .row .toggle-fold {
+    width: 9px;
+    height: 9px;
+    vertical-align: middle;
+    margin-right: 0.8ex;
+  }
 
-.branch.folded > .row .main > .toggle-fold .fold {
-  display: none;
-}
+  /* format the fold/unfold icons */
+  .foldable-table.with-icons .branch .row .toggle-fold span {
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    overflow: hidden;
+    text-indent: -10ex;
+    vertical-align: top;
+  }
+    .foldable-table.with-icons .branch .row .toggle-fold span.fold {
+      background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJAgMAAACd/+6DAAAACVBMVEUAAFMAAACAgICmUBoBAAAAAXRSTlMAQObYZgAAABRJREFUCFtjWLWqgQEZtoag8oHyAMaPCwKI/mdQ);
+    }
+    .foldable-table.with-icons .branch .row .toggle-fold span.unfold {
+      background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJAgMAAACd/+6DAAAACVBMVEUAAFQAAACAgIBj9ySPAAAAAXRSTlMAQObYZgAAABhJREFUCFtjWLWqgQEMHSC4NQTBBkGgPADYjwwCiEZCiQAAAABJRU5ErkJggg==);
+    }
 
-.branch > .row .main > .toggle-fold .unfold {
-  display: none;
-}
+  /* normally, show the unfold action icon */
+  .foldable-table .branch > .row .toggle-fold span.fold {
+    display: inline-block;
+  }
+  .foldable-table .branch > .row .toggle-fold span.unfold {
+    display: none;
+  }
 
-.branch.has-branches.folded > .row .main > .toggle-fold .unfold {
-  display: inline-block;
-}
+  /* when unfolded, show the fold action icon */
+  .foldable-table .branch.folded > .row .toggle-fold .fold {
+    display: none;
+  }
+  .foldable-table .branch.folded > .row .toggle-fold .unfold {
+    display: inline-block;
+  }
 
-.main {
-  width: 20em;
+.foldable-table .main {
   flex-grow: 1;
 }
 
-.header {
-  background: #cccccc;
+.foldable-table .header {
+  background: #000000;
+  color: #ffffff;
+  font-weight: bold;
 }
 
-.row {
+.foldable-table .row {
   display: flex;
+  padding: 0.2em 0;
 }
+  .foldable-table .branch .row:hover::before {
+    padding: 0.2em 0;
+  }
 
-.col {
-  display: inline-block;
-  flex-shrink: 0;
-}
-
-.col-0 {
+.foldable-table .col {
   width: 10em;
+  text-align: center;
 }
-
-.col-1 {
-  width: 10em;
-}
-
-.col-2 {
-  width: 10em;
-}
+  .foldable-table .row .main a.link {
+    text-decoration: none;
+    color: inherit;
+  }
+  .foldable-table .row .main a[href].link:hover {
+    text-decoration: underline;
+  }

@@ -57,19 +57,21 @@ const createBranch = ({ root, formatters, title }) => {
       return false;
     });
 
-  $('<span>').text('-').addClass('fold').appendTo($fold);
-  $('<span>').text('+').addClass('unfold').appendTo($fold);
+  if (hasBranches(root)) {
+    $('<span class="fold" />').text('-').appendTo($fold);
+    $('<span class="unfold" />').text('+').appendTo($fold);
+  }
 
   const idText = id + (hasBranches(root) ? '-*' : '');
   const label = title || (id && idText) || "";
-  const $head = $('<a>').attr('href', url).text(label).appendTo($main);
+  const $head = $('<a class="link" />').attr('href', url).text(label).appendTo($main);
 
   if (data) {
     const formattedData = $.map(data, (v, i) => {
       const fun = formatters[i];
       return fun ? fun(v) : v;
     });
-    const $cells = $.map(formattedData, (content, key) => $('<span>').text(content).addClass('col-' + key).addClass('col'));
+    const $cells = $.map(formattedData, (content, key) => $('<span>').text(content).addClass('col').addClass('col-' + key));
     $row.append($cells)
   }
 
@@ -92,8 +94,11 @@ const renderHeader = (data) => {
   return $row;
 };
 
-const renderTable = ({ root, formatters, title, header }) => {
-  const $self = $('<div>').addClass('foldable-table');
+const renderTable = ({ root, formatters, title, header, icons }) => {
+  const $self = $('<div />').addClass('foldable-table');
+  if (icons)
+    $self.addClass("with-icons");
+
   if (header) {
     renderHeader(header).appendTo($self);
   }
@@ -139,12 +144,13 @@ const addAggregatedData = (branch) => {
   return branch;
 };
 
-$.fn.foldableTable = function ({ data, formatters, header }) {
+$.fn.foldableTable = function ({ data, formatters, headers, icons = false }) {
   return this.each(function () {
     const $this = $(this);
     const title = $this.attr('title');
+    $this.attr("title", "");
     const tree = addAggregatedData(fixAnonymousLeaves(generateTree(expandPaths(data))));
-    const $table = renderTable({ root: tree, formatters, title, header });
+    const $table = renderTable({ root: tree, formatters, title, header: headers, icons });
     $this.append($table);
     const controller = {
       expandAll: () => $table.find('.branch').removeClass('folded'),
