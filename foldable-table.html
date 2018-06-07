@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Foldable Table Test</title>
+  <link rel="stylesheet" type="text/css" href="foldable-table.css" media="screen">
+  <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <script charset="utf-8">
+    /* Example data */
+    const data = [
+      { id: "foo-bee-laa"     , url: "http://example.com/foo/bee/laa"     , data: [120 , 235 , 482320 , ] } ,
+      { id: "foo-bee-ooo"     , url: "http://example.com/foo/bee/ooo"     , data: [151 , 342 , 230215 , ] } ,
+      { id: "foo-gee-sii"     , url: "http://example.com/foo/gee/sii"     , data: [25  , 35  , 302155 , ] } ,
+      { id: "boo-zee-laa"     , url: "http://example.com/boo/zee/laa"     , data: [20  , 35  , 12600  , ] } ,
+      { id: "boo-lee"         , url: "http://example.com/boo/lee"         , data: [8   , 12  , 94242  , ] } ,
+      { id: "boo-lee-laa"     , url: "http://example.com/boo/lee/laa"     , data: [1   , 1   , 14900  , ] } ,
+      { id: "boo-lee-laa-kii" , url: "http://example.com/boo/lee/laa/kii" , data: [1   , 1   , 14900  , ] } ,
+    ];
+
+    /* Columns descriptions */
+    const header = [
+      "good", "bad", "price"
+    ];
+
+    /* Columns formatters */
+    const formatters = [
+      null, null, (n) => (Number(n) / 100).toFixed(2) + ' €'
+    ];
+
+    $(() => {
+      /* Initialize with data and formatters */
+      $('#foldable-table-example').foldableTable({ data, formatters });
+
+      /* Initialize with data, formatters and headers */
+      $('#foldable-table-example2').foldableTable({ data, formatters, header });
+
+      //setTimeout(()=>$('#foldable-table-example').data('foldableTable').collapseAll(), 1000);
+      //setTimeout(()=>$('#foldable-table-example2').data('foldableTable').expandAll(), 2000);
+    });
+  </script>
+  <script src="foldable-table.js" charset="utf-8"></script>
+  <h2>Table without headers</h2>
+  <div id="foldable-table-example" title="Example Title"></div>
+  <h2>Table with headers</h2>
+  <div id="foldable-table-example2" title="Example Title"></div>
+</body>
+
+</html>

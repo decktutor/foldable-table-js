@@ -1,0 +1,11 @@
+{
+  "name": "foldable-table-js",
+  "version": "1.0.0",
+  "description": "Foldable Table",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "DeckTutor <tech@decktutor.com> (https://decktutor.com/)",
+  "license": "MIT"
+}

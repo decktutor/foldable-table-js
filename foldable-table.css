@@ -1,0 +1,68 @@
+.branch {
+  padding-left: 1em;
+}
+
+.foldable-table > .branch {
+  padding-left: 0;
+}
+
+.branch .main {
+  display: inline-block;
+}
+
+.branch.folded .branch {
+  display: none;
+}
+
+.branch .toggle-fold {
+  display: none;
+  text-align: center;
+  width: 1em;
+  text-decoration: none;
+}
+
+.branch.has-branches .toggle-fold {
+  display: inline-block;
+}
+
+.branch.folded > .row .main > .toggle-fold .fold {
+  display: none;
+}
+
+.branch > .row .main > .toggle-fold .unfold {
+  display: none;
+}
+
+.branch.has-branches.folded > .row .main > .toggle-fold .unfold {
+  display: inline-block;
+}
+
+.main {
+  width: 20em;
+  flex-grow: 1;
+}
+
+.header {
+  background: #cccccc;
+}
+
+.row {
+  display: flex;
+}
+
+.col {
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.col-0 {
+  width: 10em;
+}
+
+.col-1 {
+  width: 10em;
+}
+
+.col-2 {
+  width: 10em;
+}
